@@ -27,39 +27,46 @@ Config.Density = {
 }
 
 ConsumablesEat = {
-    ["sandwich"] = math.random(35, 54),
-    ["tosti"] = math.random(40, 50),
-    ["twerks_candy"] = math.random(35, 54),
-    ["snikkel_candy"] = math.random(40, 50),
-    ["apple"] = math.random(10, 20),
+    -- ["sandwich"] = math.random(35, 54),
+    -- ["tosti"] = math.random(40, 50),
+    ["twerks_candy"] = math.random(10, 15),
+    ["snikkel_candy"] = math.random(10, 15),
+    ["apple"] = math.random(2, 5),
     ["beef"] = math.random(35, 50),
-    ["slicedpie"] = math.random(10, 20),
-    ["corncob"] = math.random(25, 40),
-    ["canofcorn"] = math.random(35, 50),
-    ["grapes"] = math.random(10, 20),
-    ["greenpepper"] = math.random(10, 20),
-    ["chillypepper"] = math.random(10, 20),
-    ["tomato"] = math.random(10, 20),
-    ["tomatopaste"] = math.random(25, 40),
+    ["slicedpie"] = math.random(50, 70),
+    ["corncob"] = math.random(5, 10),
+    ["canofcorn"] = math.random(5, 10),
+    ["grapes"] = math.random(10, 15),
+    ["greenpepper"] = math.random(2, 5),
+    ["chillypepper"] = math.random(2, 5),
+    ["tomato"] = math.random(2, 5),
+    ["tomatopaste"] = math.random(10, 15),
     ["cooked_bacon"] = math.random(35, 50),
     ["cooked_sausage"] = math.random(35, 50),
     ["cooked_pork"] = math.random(35, 50),
     ["cooked_ham"] = math.random(35, 50),
+    ["cooked_mackerel"] = math.random(50, 70),
 }
 
 ConsumablesDrink = {
-    ["water_bottle"] = math.random(35, 54),
-    ["kurkakola"] = math.random(35, 54),
-    ["coffee"] = math.random(40, 50),
-    ["apple_juice"] = math.random(25, 45),
-    ["grapejuice"] = math.random(25, 45),
-    ["hotsauce"] = math.random(10, 15),
+    ["water_bottle"] = math.random(25, 30),
+    ["kurkakola"] = math.random(10, 15),
+    ["coffee"] = math.random(5, 10),
+    ["apple_juice"] = math.random(25, 30),
+    ["grapejuice"] = math.random(25, 30),
+    ["hotsauce"] = math.random(2, 5),
 }
 
 ConsumablesAlcohol = {
     ["whiskey"] = math.random(20, 30),
     ["beer"] = math.random(30, 40),
     ["vodka"] = math.random(20, 40),
+}
+
+ConsumablesAlcoholPercent = {
+    ["whiskey"] = 10,
+    ["beer"] = 1,
+    ["vodka"] = 10,
 }
 
 ConsumablesFireworks = {

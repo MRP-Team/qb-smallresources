@@ -40,6 +40,13 @@ QBCore.Functions.CreateUseableItem("tosti", function(source, item)
     TriggerClientEvent("consumables:client:Eat", source, item.name)
 end)
 
+QBCore.Functions.CreateUseableItem("cooked_mackerel", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	  if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
 ----------- / Drink
 
 QBCore.Functions.CreateUseableItem("water_bottle", function(source, item)
