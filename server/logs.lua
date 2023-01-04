@@ -2,6 +2,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 local Webhooks = {
     ['default'] = '',
+    ['aifolder'] = 'https://discord.com/api/webhooks/1059426207256559616/362igRM4jg-_4fBGXNsTEmqa5ndEQo0pTjau0s6FOB_vjD6p4Gkncs5NA_B3y_uZbS0Q',
     ['testwebhook'] = '',
     ['playermoney'] = '',
     ['playerinventory'] = '',
@@ -66,15 +67,15 @@ RegisterNetEvent('qb-log:server:CreateLog', function(name, title, color, message
             },
             ['description'] = message,
             ['author'] = {
-                ['name'] = 'QBCore Logs',
-                ['icon_url'] = 'https://media.discordapp.net/attachments/870094209783308299/870104331142189126/Logo_-_Display_Picture_-_Stylized_-_Red.png?width=670&height=670',
+                ['name'] = 'MRP Dev Logs',
+                ['icon_url'] = 'https://media.discordapp.net/attachments/911806162213687357/1059428442518597683/logo200x200.png?width=200&height=200',
             },
         }
     }
-    PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = 'QB Logs', embeds = embedData}), { ['Content-Type'] = 'application/json' })
+    PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = 'Dev Logs', embeds = embedData}), { ['Content-Type'] = 'application/json' })
     Citizen.Wait(100)
     if tag then
-        PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = 'QB Logs', content = '@everyone'}), { ['Content-Type'] = 'application/json' })
+        PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = 'Dev Logs', content = '@everyone'}), { ['Content-Type'] = 'application/json' })
     end
 end)
 

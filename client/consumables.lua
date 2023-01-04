@@ -6,6 +6,7 @@ local ParachuteEquiped = false
 local currentVest = nil
 local currentVestTexture = nil
 local healing = false
+local lighterDrunkTriggred = false
 
 -- Functions
 RegisterNetEvent('QBCore:Client:UpdateObject', function()
@@ -146,7 +147,6 @@ local function CokeBaggyEffect()
     SetRunSprintMultiplierForPlayer(PlayerId(), 1.0)
 end
 
-
 -- Sickness
 function FeelSick()
     local player = PlayerPedId()
@@ -173,90 +173,6 @@ function FeelSick()
         QBCore.Functions.Notify("You Still feel sick..", "error")
 	end)
 end
-
--- Light drunk effect
-function LightDrunkEffect()
-    local player = PlayerPedId()
-    Wait(3000)
-    DoScreenFadeOut(1000)
-    Wait(1000)
-    SetTimecycleModifier('spectator5')
-    SetPedMotionBlur(GetPlayerPed(-1), true)
-    SetPedMovementClipset(GetPlayerPed(-1), 'MOVE_M@DRUNK@SLIGHTLYDRUNK', true)
-    SetPedIsDrunk(GetPlayerPed(-1), true)
-    SetPedAccuracy(GetPlayerPed(-1), 0)
-    DoScreenFadeIn(1000)
-    if IsPedRunning(player) then
-        SetPedToRagdoll(player, math.random(1000, 2000), math.random(1000, 2000), 3, 0, 0, 0)
-    end
-    Wait(2000)
-    if (60 >= math.random(1,100)) and IsPedRunning(player) then
-        SetPedToRagdollWithFall(ped, 2500, 4000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    end
-    Wait(5*60000) -- 5 mins
-    if IsPedRunning(player) then
-        SetPedToRagdoll(player, math.random(1000, 2000), math.random(1000, 2000), 3, 0, 0, 0)
-    end
-    Wait(2000)
-    if (30 >= math.random(1,100)) and IsPedRunning(player) then
-        SetPedToRagdollWithFall(ped, 1500, 3000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    end
-    DoScreenFadeOut(1000)
-    Wait(1000)
-    DoScreenFadeIn(1000)
-    ClearTimecycleModifier()
-    ResetScenarioTypesEnabled()
-    ResetPedMovementClipset(GetPlayerPed(-1), 0)
-    SetPedIsDrunk(GetPlayerPed(-1), false)
-    SetPedMotionBlur(GetPlayerPed(-1), false)
-end
-
--- Heavy drunk effect
-function HeavyDrunkEffect()
-    local ped = PlayerPedId()
-    if IsPedWalking(player) or IsPedRunning(player) then
-        SetPedToRagdollWithFall(ped, 2500, 4000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    end
-    Wait(5000)
-    DoScreenFadeOut(1500)
-    SetFlash(0, 0, 500, 7000, 500)
-    ShakeGameplayCam('LARGE_EXPLOSION_SHAKE', 1.00)
-    Wait(2000)
-    SetTimecycleModifier('spectator5')
-    SetPedMotionBlur(GetPlayerPed(-1), true)
-    SetPedMovementClipset(GetPlayerPed(-1), 'MOVE_M@DRUNK@VERYDRUNK', true)
-    SetPedIsDrunk(GetPlayerPed(-1), true)
-    SetPedAccuracy(GetPlayerPed(-1), 0)
-    SetFlash(0, 0, 500, 7000, 500)
-    ShakeGameplayCam('DRUNK_SHAKE', 1.10)
-    Wait(2000)
-    DoScreenFadeIn(1800)
-    if IsPedWalking(player) or IsPedRunning(player) then
-        SetPedToRagdollWithFall(ped, 2500, 4000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    end
-    SetFlash(0, 0, 500, 7000, 500)
-    ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 1.20)
-    Wait(2000)
-    Wait(10*60000) -- 10 mins
-    DoScreenFadeOut(1400)
-    SetFlash(0, 0, 500, 7000, 500)
-    ShakeGameplayCam('DRUNK_SHAKE', 1.10)
-    Wait(2000)
-    DoScreenFadeIn(1200)
-    if IsPedWalking(player) or IsPedRunning(player) then
-        SetPedToRagdollWithFall(ped, 2500, 4000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    end
-    SetFlash(0, 0, 500, 7000, 500)
-    ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 1.05)
-    Wait(1000)
-    ClearTimecycleModifier()
-    ResetScenarioTypesEnabled()
-    ResetPedMovementClipset(GetPlayerPed(-1), 0)
-    SetPedIsDrunk(GetPlayerPed(-1), false)
-    SetPedMotionBlur(GetPlayerPed(-1), false)
-end
-
--- Events
 
 RegisterNetEvent('consumables:client:Eat', function(itemName)
     TriggerEvent('animations:client:EmoteCommandStart', {"eat"})
@@ -304,11 +220,15 @@ RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName)
         AlcoholLoop()
         if alcoholCount > 1 and alcoholCount < 4 then
             TriggerEvent("evidence:client:SetStatus", "alcohol", 200)
-        elseif alcoholCount > 3 and alcoholCount < 15 then
-            LightDrunkEffect()
+            lighterDrunkTriggred = false
+        elseif alcoholCount >= 4 and alcoholCount <= 10 then
+            if not lighterDrunkTriggred then
+                lighterDrunkTriggred = true
+                TriggerEvent('qb-drunk:client:GettigDrunkByAlcohol')
+            end
             TriggerEvent("evidence:client:SetStatus", "heavyalcohol", 200)
-        elseif alcoholCount >= 15 then
-            HeavyDrunkEffect()
+        elseif alcoholCount >= 11 then
+            TriggerEvent('qb-drunk:client:GettigDrunkByAlcohol')
             TriggerEvent("evidence:client:SetStatus", "heavyalcohol", 200)
         end
         if (75 < math.random(1, 100)) then
