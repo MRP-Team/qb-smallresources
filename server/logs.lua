@@ -3,6 +3,7 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local Webhooks = {
     ['default'] = '',
     ['aifolder'] = 'https://discord.com/api/webhooks/1059426207256559616/362igRM4jg-_4fBGXNsTEmqa5ndEQo0pTjau0s6FOB_vjD6p4Gkncs5NA_B3y_uZbS0Q',
+    ['cardupe'] = 'https://discord.com/api/webhooks/1060937474983067658/v_r7UydSSZmYuVjL3Eo_dZ6VndLgM0NhF2qUWy73uE3hCoyQU9dpL4bP5HoirlEuwPlT',
     ['testwebhook'] = '',
     ['playermoney'] = '',
     ['playerinventory'] = '',
