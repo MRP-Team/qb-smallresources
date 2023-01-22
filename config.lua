@@ -98,29 +98,11 @@ Config.Disable = {
 Config.ConsumablesEat = {
     ["twerks_candy"] = math.random(2, 5),
     ["snikkel_candy"] = math.random(2, 5),
-    ["greenpepper"] = math.random(2, 5),
-    ["chillypepper"] = math.random(2, 5),
-    ["tomato"] = math.random(2, 5),
-    ["apple"] = math.random(2, 5),
-    ["grapes"] = math.random(2, 5),
-    ["corncob"] = math.random(5, 10),
-    ["beef"] = math.random(35, 50),
-    ["slicedpie"] = math.random(50, 70),
-    ["tomatopaste"] = math.random(10, 15),
-    ["cooked_bacon"] = math.random(35, 50),
-    ["cooked_sausage"] = math.random(35, 50),
-    ["cooked_pork"] = math.random(35, 50),
-    ["cooked_ham"] = math.random(35, 50),
-    ["cooked_mackerel"] = math.random(50, 70),
 }
 
 Config.ConsumablesDrink = {
-    ["water_bottle"] = math.random(25, 30),
-    ["kurkakola"] = math.random(10, 15),
-    ["coffee"] = math.random(5, 10),
-    ["apple_juice"] = math.random(25, 30),
-    ["grapejuice"] = math.random(25, 30),
-    ["hotsauce"] = math.random(2, 5),
+    ["water_bottle"] = math.random(5, 10),
+    ["kurkakola"] = math.random(5, 10),
 }
 
 Config.ConsumablesAlcohol = {

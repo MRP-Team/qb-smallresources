@@ -17,13 +17,6 @@ for k,_ in pairs(Config.ConsumablesEat) do
     end)
 end
 
-QBCore.Functions.CreateUseableItem("cooked_mackerel", function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
-	  if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Eat", source, item.name)
-    end
-end)
-
 ----------- / Drink
 for k,_ in pairs(Config.ConsumablesDrink) do
     QBCore.Functions.CreateUseableItem(k, function(source, item)
@@ -308,7 +301,7 @@ end
 exports('AddAlcohol', AddAlcohol)
 
 local function AddCustom(itemname, data)
-    if 'consumables:itemdata' ~= nil then
+    if Config.ConsumablesCustom[itemname] ~= nil then
         return false, "already added"
     else
         Config.ConsumablesCustom[itemname] = data
