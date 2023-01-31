@@ -57,9 +57,10 @@ local Translations = {
     },
     pushcar = {
         stop_push = "[E] Stop Pushing"
-    }
-
-
+    },
+    text = {
+        afk_kick_message = "Kicked because AFK",
+    },
 }
 
 Lang = Locale:new({
